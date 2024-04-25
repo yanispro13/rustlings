@@ -1,5 +1,5 @@
 fn main() {
-    let a: i32: = 50 
+    let a = 150; 
 
     if a >= 100 {
         println!("Wow, that's a big array!");
