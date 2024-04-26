@@ -2,6 +2,7 @@
 // Address all the TODOs to make the tests pass!
 // Execute `rustlings hint enums3` or use the `hint` watch subcommand for a hint.
 
+// Implémentation de l'énumération Message avec les variantes correspondant à l'utilisation dans les tests
 enum Message {
     ChangeColor((u8, u8, u8)),
     Echo(String),

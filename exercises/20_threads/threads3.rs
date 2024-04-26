@@ -25,22 +25,28 @@ impl Queue {
 }
 
 fn send_tx(q: Queue, tx: mpsc::Sender<u32>) -> () {
+        // Création d'une instance d'Arc pour partager la file d'attente entre les threads
     let qc = Arc::new(q);
+        // Clonage de l'Arc pour obtenir deux références à la file d'attente
     let qc1 = Arc::clone(&qc);
     let qc2 = Arc::clone(&qc);
+        // Clonage du canal d'envoi pour permettre à chaque thread d'envoyer des valeurs
     let tx1 = tx.clone();
 
     thread::spawn(move || {
+                // Création du premier thread pour envoyer les valeurs de first_half
         for val in &qc1.first_half {
             println!("sending {:?}", val);
+                // Envoi de la valeur via le canal d'envoi
             tx1.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
-
+        // Création du deuxième thread pour envoyer les valeurs de second_half
     thread::spawn(move || {
         for val in &qc2.second_half {
             println!("sending {:?}", val);
+                        // Envoi de la valeur via le canal d'envoi
             tx.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }

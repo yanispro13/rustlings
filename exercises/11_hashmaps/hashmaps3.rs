@@ -18,7 +18,7 @@ use std::collections::HashMap;
 
 // A structure to store team name and its goal details.
 struct Team {
-    name: String,
+    name: String,   //champ 
     goals_scored: u8,
     goals_conceded: u8,
 }
@@ -39,7 +39,7 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.        
-        scores.entry(team_1_name.clone()) // Update Team 1
+        scores.entry(team_1_name.clone()) // ajout de .entry ainsi que .or_insert
             .and_modify(|t| { // t: Team
                 t.goals_scored += team_1_score;
                 t.goals_conceded += team_2_score;
